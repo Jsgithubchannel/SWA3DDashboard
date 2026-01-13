@@ -13,6 +13,8 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
+import { useEffect } from "react";
+
 // @mui material components
 import Grid from "@mui/material/Grid";
 
@@ -35,8 +37,16 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 
+// Log Context
+import { useLog } from "context/LogContext";
+
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
+  const { addLog } = useLog();
+
+  useEffect(() => {
+    addLog("[Gateway] Aggregating data from Billing, Property, and Metering Services...");
+  }, [addLog]);
 
   return (
     <DashboardLayout>
@@ -46,14 +56,14 @@ function Dashboard() {
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
-                color="dark"
-                icon="weekend"
-                title="Bookings"
-                count={281}
+                color="primary"
+                icon="water_drop"
+                title="Water Consumption"
+                count="2,450"
                 percentage={{
                   color: "success",
-                  amount: "+55%",
-                  label: "than lask week",
+                  amount: "+12%",
+                  label: "than last month",
                 }}
               />
             </MDBox>
@@ -119,11 +129,11 @@ function Dashboard() {
             <Grid item xs={12} md={6} lg={4}>
               <MDBox mb={3}>
                 <ReportsLineChart
-                  color="success"
-                  title="daily sales"
+                  color="warning"
+                  title="Heating Consumption (kWh)"
                   description={
                     <>
-                      (<strong>+15%</strong>) increase in today sales.
+                      Real-time data from IoT Metering Service
                     </>
                   }
                   date="updated 4 min ago"

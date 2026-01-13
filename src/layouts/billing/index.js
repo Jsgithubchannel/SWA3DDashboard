@@ -13,6 +13,8 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
+import { useEffect } from "react";
+
 // @mui material components
 import Grid from "@mui/material/Grid";
 
@@ -32,7 +34,15 @@ import Invoices from "layouts/billing/components/Invoices";
 import BillingInformation from "layouts/billing/components/BillingInformation";
 import Transactions from "layouts/billing/components/Transactions";
 
+// Log Context
+import { useLog } from "context/LogContext";
+
 function Billing() {
+  const { addLog } = useLog();
+
+  useEffect(() => {
+    addLog("[Billing Service] Fetching invoices from Distributed DB...");
+  }, [addLog]);
   return (
     <DashboardLayout>
       <DashboardNavbar absolute isMini />
