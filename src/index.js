@@ -29,7 +29,7 @@ root.render(
   <BrowserRouter>
     <MaterialUIControllerProvider>
       <LogProvider>
-        <App />
+      <App />
       </LogProvider>
     </MaterialUIControllerProvider>
   </BrowserRouter>
