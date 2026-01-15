@@ -131,11 +131,7 @@ function Dashboard() {
                 <ReportsLineChart
                   color="warning"
                   title="Heating Consumption (kWh)"
-                  description={
-                    <>
-                      Real-time data from IoT Metering Service
-                    </>
-                  }
+                  description={<>Real-time data from IoT Metering Service</>}
                   date="updated 4 min ago"
                   chart={sales}
                 />

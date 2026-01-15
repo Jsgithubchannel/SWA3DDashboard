@@ -56,123 +56,118 @@ function Configurator() {
           color: "#00ff00",
         }}
       >
-      <MDBox
-        display="flex"
-        justifyContent="space-between"
-        alignItems="baseline"
-        pt={4}
-        pb={0.5}
-        px={3}
-      >
-        <MDBox>
+        <MDBox
+          display="flex"
+          justifyContent="space-between"
+          alignItems="baseline"
+          pt={4}
+          pb={0.5}
+          px={3}
+        >
+          <MDBox>
             <MDTypography variant="h5" sx={{ color: "#ffffff !important" }}>
               System Log Console
             </MDTypography>
             <MDTypography variant="body2" sx={{ color: "#00ff00 !important" }}>
               Developer Mode - Microservices Architecture
-          </MDTypography>
+            </MDTypography>
+          </MDBox>
+
+          <Icon
+            sx={({ typography: { size } }) => ({
+              fontSize: `${size.lg} !important`,
+              color: "#00ff00",
+              stroke: "currentColor",
+              strokeWidth: "2px",
+              cursor: "pointer",
+              transform: "translateY(5px)",
+            })}
+            onClick={handleCloseConfigurator}
+          >
+            close
+          </Icon>
         </MDBox>
 
-        <Icon
-            sx={({ typography: { size } }) => ({
-            fontSize: `${size.lg} !important`,
-              color: "#00ff00",
-            stroke: "currentColor",
-            strokeWidth: "2px",
-            cursor: "pointer",
-            transform: "translateY(5px)",
-          })}
-          onClick={handleCloseConfigurator}
+        <MDBox
+          pt={2}
+          pb={3}
+          px={3}
+          sx={{
+            height: "calc(100vh - 120px)",
+            display: "flex",
+            flexDirection: "column",
+          }}
         >
-          close
-        </Icon>
-      </MDBox>
+          <MDBox mb={2} display="flex" justifyContent="space-between" alignItems="center">
+            <MDTypography variant="body2" sx={{ color: "#00ff00 !important" }}>
+              {logs.length} log entries
+            </MDTypography>
+            <MDButton
+              variant="outlined"
+              color="success"
+              size="small"
+              onClick={clearLogs}
+              sx={{
+                borderColor: "#00ff00",
+                color: "#00ff00",
+                "&:hover": {
+                  borderColor: "#00ff00",
+                  backgroundColor: "rgba(0, 255, 0, 0.1)",
+                },
+              }}
+            >
+              Clear Logs
+            </MDButton>
+          </MDBox>
 
           <MDBox
-        pt={2}
-        pb={3}
-        px={3}
+            ref={logContainerRef}
             sx={{
-          height: "calc(100vh - 120px)",
-              display: "flex",
-          flexDirection: "column",
-        }}
-            >
-        <MDBox
-          mb={2}
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <MDTypography variant="body2" sx={{ color: "#00ff00 !important" }}>
-            {logs.length} log entries
-          </MDTypography>
-          <MDButton
-            variant="outlined"
-            color="success"
-            size="small"
-            onClick={clearLogs}
-            sx={{
-              borderColor: "#00ff00",
+              flex: 1,
+              backgroundColor: "#000000",
+              borderRadius: "4px",
+              padding: "16px",
+              fontFamily: "monospace",
+              fontSize: "12px",
               color: "#00ff00",
-              "&:hover": {
-                borderColor: "#00ff00",
-                backgroundColor: "rgba(0, 255, 0, 0.1)",
+              overflowY: "auto",
+              overflowX: "hidden",
+              whiteSpace: "pre-wrap",
+              wordBreak: "break-word",
+              "&::-webkit-scrollbar": {
+                width: "8px",
+              },
+              "&::-webkit-scrollbar-track": {
+                background: "#1a1a1a",
+              },
+              "&::-webkit-scrollbar-thumb": {
+                background: "#00ff00",
+                borderRadius: "4px",
+              },
+              "&::-webkit-scrollbar-thumb:hover": {
+                background: "#00cc00",
               },
             }}
           >
-            Clear Logs
-          </MDButton>
-        </MDBox>
-
-        <MDBox
-          ref={logContainerRef}
-          sx={{
-            flex: 1,
-            backgroundColor: "#000000",
-            borderRadius: "4px",
-            padding: "16px",
-            fontFamily: "monospace",
-            fontSize: "12px",
-            color: "#00ff00",
-            overflowY: "auto",
-            overflowX: "hidden",
-            whiteSpace: "pre-wrap",
-            wordBreak: "break-word",
-            "&::-webkit-scrollbar": {
-              width: "8px",
-            },
-            "&::-webkit-scrollbar-track": {
-              background: "#1a1a1a",
-            },
-            "&::-webkit-scrollbar-thumb": {
-              background: "#00ff00",
-              borderRadius: "4px",
-            },
-            "&::-webkit-scrollbar-thumb:hover": {
-              background: "#00cc00",
-            },
-          }}
-        >
-          {logs.length === 0 ? (
-            <MDTypography variant="body2" sx={{ color: "#666666 !important" }}>
-              No logs yet. System logs will appear here...
-            </MDTypography>
-          ) : (
-            logs.map((log) => (
-              <MDTypography
-                key={log.id}
-                variant="body2"
-                sx={{
-                  color: "#00ff00 !important",
-                  marginBottom: "4px",
-                  fontFamily: "monospace",
-                }}
-              >
-                {log.message}
+            {logs.length === 0 ? (
+              <MDTypography variant="body2" sx={{ color: "#666666 !important" }}>
+                No logs yet. System logs will appear here...
               </MDTypography>
-            ))
-          )}
+            ) : (
+              logs.map((log) => (
+                <MDTypography
+                  key={log.id}
+                  variant="body2"
+                  sx={{
+                    color: "#00ff00 !important",
+                    marginBottom: "4px",
+                    fontFamily: "monospace",
+                  }}
+                >
+                  {log.message}
+                </MDTypography>
+              ))
+            )}
           </MDBox>
         </MDBox>
       </MDBox>

@@ -35,7 +35,6 @@ function LogProvider({ children }) {
       timestamp,
       message: `[${timestamp}] ${message}`,
     };
-    
     setLogs((prevLogs) => {
       const newLogs = [logEntry, ...prevLogs];
       // Keep only the last maxLogs entries
